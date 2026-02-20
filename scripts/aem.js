@@ -663,24 +663,30 @@ function markPreviewCtas(main) {
 
 /**
  * Preview instance: Styled Text content can appear as plain content with variant as last <p> (e.g. "gold").
- * Wrap the content (excluding that <p>) in div.styled-text.styled-text-gold and remove the variant <p>.
+ * Column cells don't have .column-align-left until columns block JS runs, so find cells by structure.
+ * Wrap the content (excluding the variant <p>) in div.styled-text.styled-text-gold and remove the variant <p>.
  * @param {Element} main The main element
  */
 function markPreviewStyledText(main) {
   const variantValues = ['gold'];
-  const cells = main.querySelectorAll('.column-align-left, .column-align-right');
-  cells.forEach((cell) => {
-    const last = cell.lastElementChild;
-    if (!last || last.tagName !== 'P') return;
-    const text = last.textContent.trim().toLowerCase();
-    if (!variantValues.includes(text)) return;
-    last.remove();
-    const wrapper = document.createElement('div');
-    wrapper.className = 'styled-text styled-text-gold block';
-    wrapper.dataset.blockName = 'styled-text';
-    wrapper.dataset.blockStatus = 'initialized';
-    while (cell.firstChild) wrapper.appendChild(cell.firstChild);
-    cell.appendChild(wrapper);
+  const columnsBlocks = main.querySelectorAll('.columns');
+  columnsBlocks.forEach((block) => {
+    const row = block.firstElementChild;
+    if (!row) return;
+    const cells = [...row.children];
+    cells.forEach((cell) => {
+      const last = cell.lastElementChild;
+      if (!last || last.tagName !== 'P') return;
+      const text = last.textContent.trim().toLowerCase();
+      if (!variantValues.includes(text)) return;
+      last.remove();
+      const wrapper = document.createElement('div');
+      wrapper.className = 'styled-text styled-text-gold block';
+      wrapper.dataset.blockName = 'styled-text';
+      wrapper.dataset.blockStatus = 'initialized';
+      while (cell.firstChild) wrapper.appendChild(cell.firstChild);
+      cell.appendChild(wrapper);
+    });
   });
 }
 
