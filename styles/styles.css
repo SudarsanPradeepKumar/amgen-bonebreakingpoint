@@ -319,7 +319,25 @@ main img {
 
 /* Styled Text block – variants (same as default text, plus variant classes) */
 .styled-text.styled-text-gold {
-  color: #ceb340;
+  background-color: #ceb340;
+  color: #fff;
+  padding: 1em 1.25em;
+}
+
+.styled-text.styled-text-gold h1,
+.styled-text.styled-text-gold h2,
+.styled-text.styled-text-gold h3,
+.styled-text.styled-text-gold h4,
+.styled-text.styled-text-gold h5,
+.styled-text.styled-text-gold h6,
+.styled-text.styled-text-gold p,
+.styled-text.styled-text-gold li {
+  color: inherit;
+}
+
+.styled-text.styled-text-gold a:any-link {
+  color: #fff;
+  text-decoration: underline;
 }
 
 /* Columns block – alignment (loaded with main so they apply when block decorator runs) */
