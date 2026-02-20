@@ -619,6 +619,12 @@ function decorateBlock(block) {
     blockWrapper.classList.add(`${shortBlockName}-wrapper`);
     const section = block.closest('.section');
     if (section) section.classList.add(`${shortBlockName}-container`);
+    /* Apply Styled Text variant class immediately so color shows in preview (before block JS loads) */
+    if (shortBlockName === 'styled-text') {
+      const variantEl = block.querySelector('[data-aue-prop="variant"]');
+      const raw = (variantEl?.textContent?.trim() ?? '').toLowerCase();
+      if (raw && raw !== 'default') block.classList.add(`styled-text-${raw}`);
+    }
     // eslint-disable-next-line no-use-before-define
     decorateButtons(block);
   }
