@@ -6,26 +6,48 @@ function parseAlignClass(str) {
   return null;
 }
 
+/** Get full classes string from block (any source) so we can apply to block and parse. */
+function getBlockClassesString(block) {
+  const dataClasses = (block.getAttribute('data-column-classes') || '').trim();
+  if (dataClasses) return dataClasses;
+  const classesEl = block.querySelector('[data-aue-prop="classes"]');
+  const fromEl = classesEl ? (classesEl.textContent || '').trim() : '';
+  if (fromEl) return fromEl;
+  const fromBlockClass = Array.from(block.classList).find(
+    (c) => c.startsWith('columns-align-') || c.startsWith('columns-valign-'),
+  );
+  if (fromBlockClass) {
+    const all = Array.from(block.classList)
+      .filter((c) => c.startsWith('columns-align-') || c.startsWith('columns-valign-'))
+      .join(' ');
+    if (all) return all;
+  }
+  const firstRow = block.firstElementChild;
+  if (firstRow) {
+    for (let i = 0; i < firstRow.children.length; i += 1) {
+      const cellText = (firstRow.children[i].textContent || '').trim();
+      if (cellText && (cellText.includes('columns-align-') || cellText.includes('columns-valign-')))
+        return cellText;
+    }
+  }
+  const blockText = block.textContent || '';
+  const alignMatch = blockText.match(/columns-align-(?:left|right)(?:-(?:left|right))+/i);
+  const valignMatch = blockText.match(/columns-valign-(?:top|center|bottom)/i);
+  const parts = [];
+  if (alignMatch) parts.push(alignMatch[0]);
+  if (valignMatch) parts.push(valignMatch[0]);
+  if (parts.length) return parts.join(' ');
+  return '';
+}
+
 /**
- * Read column alignments from block. Tries, in order:
- * 1) data-aue-prop="classes" (UE "Content alignment" field)
- * 2) block class columns-align-*
- * 3) data-aue-prop="columnAlignments"
- * 4) data-column-alignments attribute
- * 5) first row third cell
- * 6) search block text for columns-align-* (preview fallback)
+ * Read column alignments (horizontal) from block.
  */
 function getBlockColumnAlignments(block) {
-  const classesEl = block.querySelector('[data-aue-prop="classes"]');
-  const classesRaw = classesEl ? (classesEl.textContent || '').trim() : '';
+  const classesRaw = getBlockClassesString(block);
   const alignFromClasses = classesRaw.split(/\s+/).find((c) => c.startsWith('columns-align-'));
   if (alignFromClasses) {
     const out = parseAlignClass(alignFromClasses);
-    if (out) return out;
-  }
-  const alignClass = Array.from(block.classList).find((c) => c.startsWith('columns-align-'));
-  if (alignClass) {
-    const out = parseAlignClass(alignClass);
     if (out) return out;
   }
   const columnAlignEl = block.querySelector('[data-aue-prop="columnAlignments"]');
@@ -37,18 +59,6 @@ function getBlockColumnAlignments(block) {
   if (attr) {
     return attr.split(',').map((s) => (s.trim().toLowerCase() === 'right' ? 'right' : 'left'));
   }
-  const firstRow = block.firstElementChild;
-  const thirdCell = firstRow && firstRow.children.length >= 3 ? firstRow.children[2].textContent : '';
-  const value = (thirdCell || '').trim();
-  if (value) {
-    const fromCell = value.includes(',')
-      ? value.split(',').map((s) => (s.trim().toLowerCase() === 'right' ? 'right' : 'left'))
-      : parseAlignClass(value);
-    if (fromCell) return fromCell;
-  }
-  const blockText = block.textContent || '';
-  const parsed = parseAlignClass(blockText);
-  if (parsed && parsed.length >= 1) return parsed;
   return ['left', 'left'];
 }
 
@@ -65,12 +75,9 @@ function getColumnAlignment(col, index, blockAlignments) {
 }
 
 function getBlockVerticalAlignment(block) {
-  const classesEl = block.querySelector('[data-aue-prop="classes"]');
-  const classesRaw = classesEl ? (classesEl.textContent || '').trim() : '';
+  const classesRaw = getBlockClassesString(block);
   const valign = classesRaw.split(/\s+/).find((c) => c.startsWith('columns-valign-'));
   if (valign && /columns-valign-(top|center|bottom)/i.test(valign)) return valign;
-  const fromBlock = Array.from(block.classList).find((c) => c.startsWith('columns-valign-'));
-  if (fromBlock && /columns-valign-(top|center|bottom)/i.test(fromBlock)) return fromBlock;
   const blockText = block.textContent || '';
   const m = blockText.match(/columns-valign-(top|center|bottom)/i);
   if (m) return `columns-valign-${m[1].toLowerCase()}`;
@@ -81,6 +88,15 @@ export default function decorate(block) {
   const firstRow = block.firstElementChild;
   const cols = firstRow ? [...firstRow.children] : [];
   block.classList.add(`columns-${cols.length}-cols`);
+
+  const classesString = getBlockClassesString(block);
+  if (classesString) {
+    classesString.split(/\s+/).forEach((c) => {
+      if (c && (c.startsWith('columns-align-') || c.startsWith('columns-valign-'))) {
+        block.classList.add(c);
+      }
+    });
+  }
 
   const blockAlignments = getBlockColumnAlignments(block);
   const valignClass = getBlockVerticalAlignment(block);

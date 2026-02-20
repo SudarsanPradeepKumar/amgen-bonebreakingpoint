@@ -19,7 +19,13 @@
   display: block;
 }
 
-/* Per-column content alignment: left or right */
+/* Column cells: flex column so horizontal + vertical alignment work */
+.columns > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Per-column horizontal alignment: left or right */
 .columns > div > div.column-align-left {
   text-align: left;
 }
@@ -29,11 +35,6 @@
 }
 
 /* Vertical alignment of content within each column (top, center, bottom) */
-.columns > div > div {
-  display: flex;
-  flex-direction: column;
-}
-
 .columns-valign-top > div > div {
   justify-content: flex-start;
 }
@@ -48,13 +49,14 @@
 
 @media (width >= 900px) {
   .columns > div {
-    align-items: center;
-    flex-direction: unset;
+    align-items: stretch;
+    flex-direction: row;
     gap: 24px;
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
+    min-height: 0;
   }
 }

@@ -317,6 +317,35 @@ main img {
   color: #318bda;
 }
 
+/* Columns block – alignment (loaded with main so they apply when block decorator runs) */
+.columns > div > div {
+  display: flex;
+  flex-direction: column;
+}
+.columns > div > div.column-align-left {
+  text-align: left;
+}
+.columns > div > div.column-align-right {
+  text-align: right;
+}
+.columns-valign-top > div > div {
+  justify-content: flex-start;
+}
+.columns-valign-center > div > div {
+  justify-content: center;
+}
+.columns-valign-bottom > div > div {
+  justify-content: flex-end;
+}
+@media (width >= 900px) {
+  .columns > div {
+    align-items: stretch;
+  }
+  .columns > div > div {
+    flex: 1;
+  }
+}
+
 /* sections */
 main > .section {
   margin: 0;
