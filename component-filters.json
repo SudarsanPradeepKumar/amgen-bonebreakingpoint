@@ -1,34 +1,10 @@
 [
-  {
-    "id": "main",
-    "components": ["section"]
-  },
-  {
-    "id": "section",
-    "components": ["text", "image", "button", "title", "hero", "cards", "columns", "fragment", "cta"]
-  },
-  {
-    "id": "accordion-quiz",
-    "components": ["accordion-quiz-item"]
-  },
-  {
-    "id": "cards",
-    "components": ["card"]
-  },
-  {
-    "id": "columns-promo",
-    "components": ["column"]
-  },
-  {
-    "id": "column",
-    "components": ["text", "image", "title", "cta"]
-  },
-  {
-    "id": "columns",
-    "components": ["column"]
-  },
-  {
-    "id": "column",
-    "components": ["text", "image", "title", "cta"]
-  }
+  {"id": "main", "components": ["section"]},
+  {"id": "section", "components": ["text", "styled-text", "image", "button", "title", "hero", "cards", "columns", "fragment", "cta"]},
+  {"id": "accordion-quiz", "components": ["accordion-quiz-item"]},
+  {"id": "cards", "components": ["card"]},
+  {"id": "columns-promo", "components": ["column"]},
+  {"id": "column", "components": ["text", "styled-text", "image", "title", "cta"]},
+  {"id": "columns", "components": ["column"]},
+  {"id": "column", "components": ["text", "styled-text", "image", "title", "cta"]}
 ]
