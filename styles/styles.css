@@ -265,6 +265,17 @@ main img {
   width: 100%;
 }
 
+/* CTA: hide until block is loaded to avoid flash of raw label/variant content */
+.cta:not([data-block-status="loaded"]) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cta[data-block-status="loaded"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* sections */
 main > .section {
   margin: 0;
