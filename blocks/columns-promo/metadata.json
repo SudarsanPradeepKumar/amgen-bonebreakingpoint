@@ -1,0 +1,40 @@
+{
+  "variantName": "columns-promo",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-02-20T16:14:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.bonebreakingpoint.com/",
+    "originPage": "Homepage - promo sections",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "promo",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + paragraph + optional CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "image + text promotional sections",
+      "alternating content layouts",
+      "feature highlight sections",
+      "informational two-column content"
+    ],
+    "notSuitableFor": [
+      "card grids with multiple items",
+      "icon-based feature lists",
+      "data tables"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-20T16:14:00.000Z"
+  }
+}

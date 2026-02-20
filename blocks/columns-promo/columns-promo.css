@@ -1,0 +1,96 @@
+/* Columns Promo Block
+ * Two-column layout with image + text content
+ * Matching bonebreakingpoint.com promo sections
+ */
+
+/* Container - remove section max-width constraint for full-bleed */
+.columns-promo-container .columns-promo-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+/* Each row is a 2-col layout */
+.columns-promo > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: var(--section-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.columns-promo > div + div {
+  margin-top: 40px;
+}
+
+/* Image column */
+.columns-promo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.columns-promo > div > div {
+  order: 1;
+}
+
+.columns-promo > div > .columns-promo-img-col {
+  order: 0;
+}
+
+.columns-promo > div > .columns-promo-img-col img {
+  display: block;
+}
+
+/* Text column typography */
+.columns-promo h3 {
+  margin-top: 0;
+  margin-bottom: 0.4em;
+}
+
+.columns-promo h4 {
+  margin-top: 1.2em;
+  margin-bottom: 0.3em;
+}
+
+/* stylelint-disable no-descending-specificity */
+.columns-promo h4:first-child,
+.columns-promo h3 + h4 {
+  margin-top: 0.5em;
+}
+/* stylelint-enable no-descending-specificity */
+
+.columns-promo p {
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
+}
+
+/* CTA links as buttons */
+.columns-promo a.button:any-link {
+  margin-top: 1.2em;
+}
+
+/* Desktop layout */
+@media (width >= 900px) {
+  .columns-promo > div {
+    flex-direction: row;
+    gap: 80px;
+    padding: 0 32px;
+  }
+
+  .columns-promo > div > div {
+    flex: 1;
+    order: unset;
+  }
+
+  .columns-promo > div > .columns-promo-img-col {
+    flex: 0 0 auto;
+    max-width: 50%;
+  }
+}
+
+@media (width >= 1200px) {
+  .columns-promo > div {
+    gap: 120px;
+  }
+}

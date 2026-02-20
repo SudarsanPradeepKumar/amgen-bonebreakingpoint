@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "url": "https://www.bonebreakingpoint.com/",
+  "path": "index",
+  "timestamp": "2026-02-20T17:17:40.903Z",
+  "title": "Postmenopausal Osteoporosis: Causes, Risks, & Treatment",
+  "template": "homepage",
+  "blocks": [
+    "hero-banner",
+    "hero-banner",
+    "columns-promo",
+    "columns-promo",
+    "columns-promo",
+    "columns-promo",
+    "hero-cta",
+    "hero-cta",
+    "accordion-quiz"
+  ]
+}

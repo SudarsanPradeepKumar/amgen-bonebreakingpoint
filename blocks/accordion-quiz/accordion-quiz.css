@@ -1,0 +1,96 @@
+/* Accordion Quiz Block
+ * Interactive quiz accordion styled for dark/purple sections
+ * Cream-colored text and borders on purple background
+ */
+
+.accordion-quiz {
+  max-width: 800px;
+}
+
+.accordion-quiz details {
+  border: 2px solid var(--color-cream);
+  border-radius: 0;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.accordion-quiz details + details {
+  margin-top: 16px;
+}
+
+.accordion-quiz details p {
+  margin-bottom: 0.8em;
+}
+
+/* Summary (question) */
+.accordion-quiz details summary {
+  position: relative;
+  padding: 16px 48px 16px 20px;
+  cursor: pointer;
+  list-style: none;
+  overflow: auto;
+  transition: background-color 0.2s;
+  font-size: var(--body-font-size-s);
+  color: var(--color-cream);
+}
+
+.accordion-quiz details[open] summary {
+  background-color: rgb(255 255 255 / 10%);
+}
+
+.accordion-quiz details summary:focus,
+.accordion-quiz details summary:hover {
+  background-color: rgb(255 255 255 / 10%);
+}
+
+.accordion-quiz details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron indicator */
+.accordion-quiz details summary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%) rotate(135deg);
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--color-cream);
+  border-width: 2px 2px 0 0;
+  transition: transform 0.2s;
+}
+
+.accordion-quiz details[open] summary::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Body (answer) */
+.accordion-quiz details .accordion-quiz-item-body {
+  padding: 16px 20px;
+}
+
+.accordion-quiz details:not([open]) .accordion-quiz-item-body {
+  display: none;
+}
+
+.accordion-quiz details[open] .accordion-quiz-item-body {
+  border-top: 2px solid var(--color-cream);
+  background-color: rgb(255 255 255 / 8%);
+}
+
+/* Answer headings and text inherit section cream color */
+.accordion-quiz .accordion-quiz-item-body h2 {
+  font-size: var(--heading-font-size-s);
+  color: var(--color-cream);
+  margin-top: 0;
+}
+
+.accordion-quiz .accordion-quiz-item-body p {
+  color: var(--color-cream);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.accordion-quiz summary p {
+  margin: 0;
+  color: var(--color-cream);
+}

@@ -1,0 +1,65 @@
+{
+  "definitions": [
+    {
+      "title": "Accordion Quiz",
+      "id": "accordion-quiz",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Accordion Quiz",
+              "filter": "accordion-quiz"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Accordion Quiz Item",
+      "id": "accordion-quiz-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Accordion Quiz Item",
+              "model": "accordion-quiz-item",
+              "summary": "Lorem Ipsum",
+              "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur volutpat consequat dui, sit amet ...</p>"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "accordion-quiz-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "summary",
+          "value": "",
+          "label": "Summary"
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "accordion-quiz",
+      "components": [
+        "accordion-quiz-item"
+      ]
+    }
+  ]
+}

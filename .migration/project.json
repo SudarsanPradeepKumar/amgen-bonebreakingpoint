@@ -1,0 +1,9 @@
+{
+  "type": "xwalk",
+  "contentHostUrl": "author-p148597-e1937574.adobeaemcloud.com",
+  "libraryUrl": "https://main--sta-xwalk-boilerplate--aemysites.aem.page/tools/sidekick/library.json",
+  "aemSitePath": "/content/bonebreakingpoint",
+  "aemAssetsFolderPath": "/content/dam/bonebreakingpoint",
+  "aemSiteName": "bonebreakingpoint",
+  "aemSiteTitle": "bonebreakingpoint"
+}

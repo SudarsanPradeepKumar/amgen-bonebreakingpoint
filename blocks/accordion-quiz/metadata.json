@@ -1,0 +1,40 @@
+{
+  "variantName": "accordion-quiz",
+  "baseBlock": "accordion",
+  "version": "1.0.0",
+  "created": "2026-02-20T16:14:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.bonebreakingpoint.com/",
+    "originPage": "Homepage - quiz section",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "compact",
+    "purpose": "quiz",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "question + answer pairs",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "quiz and Q&A sections",
+      "FAQ sections",
+      "educational content with reveal answers",
+      "true/false knowledge checks"
+    ],
+    "notSuitableFor": [
+      "navigation menus",
+      "multi-step forms",
+      "content with rich media"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-20T16:14:00.000Z"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-banner",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-02-20T16:14:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.bonebreakingpoint.com/",
+    "originPage": "Homepage - landing page hero",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "landing-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + paragraph + CTA link",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "landing pages with background images",
+      "homepage hero sections",
+      "awareness pages with bold headlines"
+    ],
+    "notSuitableFor": [
+      "text-only hero sections",
+      "product detail pages",
+      "dark themed sections"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["content/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-02-20T16:14:00.000Z"
+  }
+}

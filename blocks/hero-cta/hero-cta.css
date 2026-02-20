@@ -1,0 +1,90 @@
+/* Hero CTA Block
+ * Image + text side-by-side layout for CTA sections
+ * 3-column model: image | imageAlt (hidden) | text
+ * Used for "Treatment can help" and "What's your risk level?" sections
+ * Typically placed in dark-purple sections
+ */
+
+.hero-cta-container .hero-cta-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+/* Row container */
+.hero-cta > div {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--section-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Image column */
+.hero-cta > div > div:first-child {
+  flex-shrink: 0;
+}
+
+.hero-cta img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Hide imageAlt column (metadata only) */
+.hero-cta > div > div:nth-child(2) {
+  display: none;
+}
+
+/* Text column */
+.hero-cta > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-cta h3 {
+  margin-top: 0.5em;
+}
+
+.hero-cta h4 {
+  margin-top: 0.3em;
+  margin-bottom: 0.4em;
+}
+
+.hero-cta p {
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
+}
+
+.hero-cta a.button:any-link {
+  margin-top: 1.2em;
+}
+
+/* Desktop: side-by-side */
+@media (width >= 900px) {
+  .hero-cta > div {
+    flex-direction: row;
+    gap: 80px;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .hero-cta > div > div:first-child {
+    flex: 0 0 auto;
+    max-width: 45%;
+  }
+
+  .hero-cta > div > div:last-child {
+    flex: 1;
+  }
+
+  .hero-cta h3 {
+    margin-top: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  .hero-cta > div {
+    gap: 120px;
+  }
+}

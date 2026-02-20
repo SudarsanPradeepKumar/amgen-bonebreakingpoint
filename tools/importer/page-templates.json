@@ -1,0 +1,156 @@
+{
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.bonebreakingpoint.com/"
+      ],
+      "description": "Homepage template for Bone Breaking Point website",
+      "blocks": [
+        {
+          "name": "hero-banner",
+          "instances": [
+            ".component.plain-html.banner-text",
+            "#doing-all > .component-content > .component.promo.Osteoporosis-promo"
+          ]
+        },
+        {
+          "name": "columns-promo",
+          "instances": [
+            "#osteoporosis-one",
+            "#next-break",
+            "#good-news",
+            "#doing-all .column-splitter"
+          ]
+        },
+        {
+          "name": "hero-cta",
+          "instances": [
+            "#treatment-can-help",
+            "#discover-treatment"
+          ]
+        },
+        {
+          "name": "accordion-quiz",
+          "instances": [
+            ".quiz-content"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1-hero",
+          "name": "Hero Banner",
+          "selector": "header.header-nav",
+          "style": null,
+          "blocks": [
+            "hero-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2-osteoporosis-facts",
+          "name": "Osteoporosis Facts",
+          "selector": "#osteoporosis-one",
+          "style": "light",
+          "blocks": [
+            "columns-promo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3-next-break",
+          "name": "5x Break Risk",
+          "selector": "#next-break",
+          "style": null,
+          "blocks": [
+            "columns-promo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4-good-news",
+          "name": "Good News / Treatment",
+          "selector": "#good-news",
+          "style": null,
+          "blocks": [
+            "columns-promo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5-doing-all",
+          "name": "Doing All You Can",
+          "selector": "#doing-all",
+          "style": null,
+          "blocks": [
+            "hero-banner",
+            "columns-promo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-6-treatment-can-help",
+          "name": "Treatment Can Help",
+          "selector": "#treatment-can-help",
+          "style": "dark-purple",
+          "blocks": [
+            "hero-cta"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-7-risk-table",
+          "name": "Risk Level Table",
+          "selector": "#table",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#table .desk-only img",
+            "#table .mob-only img"
+          ]
+        },
+        {
+          "id": "section-8-risk-level",
+          "name": "What's Your Risk Level",
+          "selector": "#discover-treatment",
+          "style": "dark-purple",
+          "blocks": [
+            "hero-cta"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-9-reduce-risk",
+          "name": "Reduce Your Risk",
+          "selector": [
+            "#paper-img",
+            "#you-can-do-more"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "#paper-img img",
+            "#you-can-do-more h3",
+            "#you-can-do-more .row p",
+            "#you-can-do-more .take-vitamin-list ul",
+            "#you-can-do-more .medic-option a"
+          ]
+        },
+        {
+          "id": "section-10-quiz",
+          "name": "Quiz Section",
+          "selector": "#quize-container",
+          "style": "dark",
+          "blocks": [
+            "accordion-quiz"
+          ],
+          "defaultContent": [
+            ".quiz-section h3",
+            ".quiz-section p"
+          ]
+        }
+      ]
+    }
+  ]
+}

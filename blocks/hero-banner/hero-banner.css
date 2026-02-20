@@ -1,0 +1,48 @@
+/* Hero Banner Block
+ * Full-width text banner section
+ * Used for "Doing all you can to help prevent another break?" on blue bg
+ */
+
+.hero-banner-container .hero-banner-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-banner {
+  max-width: var(--section-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Remove the empty first row (image placeholder) */
+.hero-banner > div:first-child:empty,
+.hero-banner > div:first-child:not(:has(*:not(div:empty))) {
+  display: none;
+}
+
+/* Text content */
+.hero-banner h3,
+.hero-banner h4 {
+  margin-top: 0;
+}
+
+.hero-banner h4 {
+  font-size: 35px;
+  line-height: 1.1;
+  margin-bottom: 0.5em;
+}
+
+.hero-banner p {
+  margin-top: 0.5em;
+  line-height: 1.6;
+}
+
+@media (width >= 900px) {
+  .hero-banner {
+    padding: 0 32px;
+  }
+
+  .hero-banner h4 {
+    font-size: 35px;
+  }
+}
