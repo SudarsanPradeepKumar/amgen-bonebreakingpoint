@@ -304,5 +304,50 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "cta",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "name": "linkTitle",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "variant",
+        "label": "Variant",
+        "options": [
+          { "name": "Variant 1 (Blue)", "value": "variant-1" },
+          { "name": "Variant 2 (Cream / Purple)", "value": "variant-2" },
+          { "name": "Variant 3 (Cream / Blue)", "value": "variant-3" }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "action",
+        "label": "Action",
+        "options": [
+          { "name": "Open link", "value": "link" },
+          { "name": "Open modal", "value": "modal" }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "modalId",
+        "label": "Modal ID",
+        "description": "ID of the modal element to open when Action is Open modal"
+      }
+    ]
   }
 ]
