@@ -123,6 +123,13 @@
     "id": "styled-text",
     "fields": [
       {
+        "component": "richtext",
+        "name": "text",
+        "label": "Text",
+        "value": "",
+        "valueType": "string"
+      },
+      {
         "component": "select",
         "name": "variant",
         "label": "Variant",
