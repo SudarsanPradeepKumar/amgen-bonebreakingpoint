@@ -625,11 +625,25 @@ function decorateBlock(block) {
 }
 
 /**
+ * Block names that can appear both at section level and nested (e.g. inside columns).
+ * Section-level blocks are found by div.section > div > div. Nested blocks are
+ * found by a second pass so CTA (and others) render correctly in both places.
+ */
+const NESTED_BLOCK_NAMES = ['cta'];
+
+/**
  * Decorates all blocks in a container element.
+ * 1) Section-level blocks: div.section > div > div (e.g. CTA, columns, hero).
+ * 2) Nested blocks: div.section div.cta etc., so CTA inside columns is also decorated.
  * @param {Element} main The container element
  */
 function decorateBlocks(main) {
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
+  NESTED_BLOCK_NAMES.forEach((name) => {
+    main.querySelectorAll(`div.section div.${name}`).forEach((el) => {
+      if (!el.dataset.blockStatus) decorateBlock(el);
+    });
+  });
 }
 
 /**
