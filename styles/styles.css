@@ -335,20 +335,21 @@ main img {
   color: inherit;
 }
 
+/* inline-block + width 100% so border height matches content only in columns */
 .styled-text.styled-text-border-right {
   border-right: 2px solid #ceb340;
   padding-right: 1.25em;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .styled-text.styled-text-border-left {
   border-left: 2px solid #ceb340;
   padding-left: 1.25em;
-}
-
-/* Contain styled-text border to block height only in columns (no stretch) */
-.columns > div > div > *:has(> .styled-text.styled-text-border-right),
-.columns > div > div > *:has(> .styled-text.styled-text-border-left) {
-  align-self: flex-start;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Columns block – alignment (loaded with main so they apply when block decorator runs) */
