@@ -1,8 +1,10 @@
 {
   "mappings": [
-    "/content/aem-boilerplate/:/"
+    "/content/bonebreakingpoint/:/",
+    "/content/bonebreakingpoint/metadata:/metadata.json",
+    "/content/bonebreakingpoint/configuration:/.helix/config.json"
   ],
   "includes": [
-    "/content/aem-boilerplate/"
+    "/content/bonebreakingpoint/"
   ]
 }
