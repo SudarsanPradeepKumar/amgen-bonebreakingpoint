@@ -11,44 +11,54 @@
 }
 
 /* Base: transparent background, border and text from variant */
-.cta a.button {
+.cta a.button,
+.cta button.button {
   background-color: transparent;
   border: 4px solid;
   transition: var(--button-transition);
 }
 
-/* Variant 1: Blue border & text → hover: blue bg, white text */
-.cta a.button.variant-1 {
+/* Default (variant-1): Blue border & text → hover: blue bg, white text */
+.cta a.button.variant-1,
+.cta button.button.variant-1 {
   border-color: #318bda;
   color: #318bda;
 }
 
 .cta a.button.variant-1:hover,
-.cta a.button.variant-1:focus {
+.cta a.button.variant-1:focus,
+.cta button.button.variant-1:hover,
+.cta button.button.variant-1:focus {
   background-color: #318bda;
   color: #fff;
 }
 
 /* Variant 2: Cream border & text → hover: cream bg, purple text */
-.cta a.button.variant-2 {
+.cta a.button.variant-2,
+.cta button.button.variant-2 {
   border-color: #ede6de;
   color: #ede6de;
 }
 
 .cta a.button.variant-2:hover,
-.cta a.button.variant-2:focus {
+.cta a.button.variant-2:focus,
+.cta button.button.variant-2:hover,
+.cta button.button.variant-2:focus {
   background-color: #ede6de;
   color: #542d70;
 }
 
 /* Variant 3: Cream border & text → hover: cream bg, blue text */
-.cta a.button.variant-3 {
+.cta a.button.variant-3,
+.cta button.button.variant-3 {
   border-color: #ede6de;
   color: #ede6de;
 }
 
 .cta a.button.variant-3:hover,
-.cta a.button.variant-3:focus {
+.cta a.button.variant-3:focus,
+.cta button.button.variant-3:hover,
+.cta button.button.variant-3:focus {
   background-color: #ede6de;
   color: #318bda;
 }
