@@ -337,10 +337,12 @@ main img {
 
 .styled-text.styled-text-border-right {
   border-right: 2px solid #ceb340;
+  padding-right: 1.25em;
 }
 
 .styled-text.styled-text-border-left {
   border-left: 2px solid #ceb340;
+  padding-left: 1.25em;
 }
 
 /* Columns block – alignment (loaded with main so they apply when block decorator runs) */

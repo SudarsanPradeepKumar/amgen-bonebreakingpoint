@@ -1,22 +1,26 @@
 /**
- * Styled Text block – extends default text with variants (Default, Gold, etc.).
- * Reads variant from model, applies class styled-text-{variant}, and removes
- * the variant metadata element so it is not displayed on the page.
+ * Styled Text block – color and border as separate fields.
+ * Applies styled-text-{colorVariant} and styled-text-{borderVariant}, removes metadata rows.
  */
-function getVariant(block) {
-  const el = block.querySelector('[data-aue-prop="variant"]');
-  const raw = (el?.textContent?.trim() ?? block.dataset.variant ?? block.getAttribute('data-variant') ?? '').toLowerCase();
+function getField(block, prop) {
+  const el = block.querySelector(`[data-aue-prop="${prop}"]`);
+  const raw = (el?.textContent?.trim() ?? '').toLowerCase();
   return raw && raw !== 'default' ? raw : '';
 }
 
+function removePropRow(block, prop) {
+  const el = block.querySelector(`[data-aue-prop="${prop}"]`);
+  if (!el) return;
+  let row = el;
+  while (row.parentElement && row.parentElement !== block) row = row.parentElement;
+  if (row.parentElement === block) row.remove();
+}
+
 export default function decorate(block) {
-  const variantEl = block.querySelector('[data-aue-prop="variant"]');
-  const variant = getVariant(block);
-  if (variant) block.classList.add(`styled-text-${variant}`);
-  /* Remove variant metadata row so "gold" (or other value) is not shown on the page */
-  if (variantEl) {
-    let row = variantEl;
-    while (row.parentElement && row.parentElement !== block) row = row.parentElement;
-    if (row.parentElement === block) row.remove();
-  }
+  const colorVariant = getField(block, 'colorVariant');
+  const borderVariant = getField(block, 'borderVariant');
+  if (colorVariant) block.classList.add(`styled-text-${colorVariant}`);
+  if (borderVariant) block.classList.add(`styled-text-${borderVariant}`);
+  removePropRow(block, 'colorVariant');
+  removePropRow(block, 'borderVariant');
 }

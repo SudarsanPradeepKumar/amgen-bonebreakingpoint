@@ -131,8 +131,8 @@
       },
       {
         "component": "select",
-        "name": "variant",
-        "label": "Variant",
+        "name": "colorVariant",
+        "label": "Color",
         "options": [
           {
             "name": "Default",
@@ -141,6 +141,17 @@
           {
             "name": "Gold",
             "value": "gold"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "borderVariant",
+        "label": "Border",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
           },
           {
             "name": "Border right",

@@ -17,5 +17,52 @@
       }
     }
   ],
-  "models": [{"id": "styled-text", "fields": [{"component": "richtext", "name": "text", "label": "Text", "value": "", "valueType": "string"}, {"component": "select", "name": "variant", "label": "Variant", "options": [{"name": "Default", "value": "default"}, {"name": "Gold", "value": "gold"}, {"name": "Border right", "value": "border-right"}, {"name": "Border left", "value": "border-left"}]}]}]
+  "models": [
+    {
+      "id": "styled-text",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "text",
+          "label": "Text",
+          "value": "",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "colorVariant",
+          "label": "Color",
+          "options": [
+            {
+              "name": "Default",
+              "value": "default"
+            },
+            {
+              "name": "Gold",
+              "value": "gold"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "borderVariant",
+          "label": "Border",
+          "options": [
+            {
+              "name": "Default",
+              "value": "default"
+            },
+            {
+              "name": "Border right",
+              "value": "border-right"
+            },
+            {
+              "name": "Border left",
+              "value": "border-left"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

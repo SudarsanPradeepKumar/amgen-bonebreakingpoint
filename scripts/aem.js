@@ -619,11 +619,14 @@ function decorateBlock(block) {
     blockWrapper.classList.add(`${shortBlockName}-wrapper`);
     const section = block.closest('.section');
     if (section) section.classList.add(`${shortBlockName}-container`);
-    /* Apply Styled Text variant class immediately so color shows in preview (before block JS loads) */
+    /* Apply Styled Text color and border classes immediately (before block JS loads) */
     if (shortBlockName === 'styled-text') {
-      const variantEl = block.querySelector('[data-aue-prop="variant"]');
-      const raw = (variantEl?.textContent?.trim() ?? '').toLowerCase();
-      if (raw && raw !== 'default') block.classList.add(`styled-text-${raw}`);
+      const colorEl = block.querySelector('[data-aue-prop="colorVariant"]');
+      const borderEl = block.querySelector('[data-aue-prop="borderVariant"]');
+      const color = (colorEl?.textContent?.trim() ?? '').toLowerCase();
+      const border = (borderEl?.textContent?.trim() ?? '').toLowerCase();
+      if (color && color !== 'default') block.classList.add(`styled-text-${color}`);
+      if (border && border !== 'default') block.classList.add(`styled-text-${border}`);
     }
     // eslint-disable-next-line no-use-before-define
     decorateButtons(block);
@@ -662,26 +665,33 @@ function markPreviewCtas(main) {
 }
 
 /**
- * Preview instance: Styled Text content can appear as plain content with variant as last <p> (e.g. "gold").
- * Column cells don't have .column-align-left until columns block JS runs, so find cells by structure.
- * Wrap the content (excluding the variant <p>) in div.styled-text.styled-text-{variant} and remove the variant <p>.
+ * Preview instance: Styled Text can have color and/or border as last one or two <p>s (e.g. "gold", "border-right").
+ * Wrap content in div.styled-text with the appropriate variant classes and remove the variant <p>s.
  * @param {Element} main The main element
  */
 function markPreviewStyledText(main) {
-  const variantValues = ['gold', 'border-right', 'border-left'];
+  const colorValues = ['gold'];
+  const borderValues = ['border-right', 'border-left'];
+  const allValues = [...colorValues, ...borderValues];
   const columnsBlocks = main.querySelectorAll('.columns');
   columnsBlocks.forEach((block) => {
     const row = block.firstElementChild;
     if (!row) return;
     const cells = [...row.children];
     cells.forEach((cell) => {
-      const last = cell.lastElementChild;
-      if (!last || last.tagName !== 'P') return;
-      const text = last.textContent.trim().toLowerCase();
-      if (!variantValues.includes(text)) return;
-      last.remove();
+      const classes = ['styled-text'];
+      let last = cell.lastElementChild;
+      while (last && last.tagName === 'P') {
+        const text = last.textContent.trim().toLowerCase();
+        if (allValues.includes(text)) {
+          classes.push(`styled-text-${text}`);
+          last.remove();
+          last = cell.lastElementChild;
+        } else break;
+      }
+      if (classes.length <= 1) return;
       const wrapper = document.createElement('div');
-      wrapper.className = `styled-text styled-text-${text} block`;
+      wrapper.className = `${classes.join(' ')} block`;
       wrapper.dataset.blockName = 'styled-text';
       wrapper.dataset.blockStatus = 'initialized';
       while (cell.firstChild) wrapper.appendChild(cell.firstChild);
