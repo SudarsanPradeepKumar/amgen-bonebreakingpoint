@@ -346,6 +346,11 @@ main img {
   }
 }
 
+/* Text (richtext) variant – gold */
+.text.text-gold {
+  color: #ceb340;
+}
+
 /* sections */
 main > .section {
   margin: 0;
