@@ -33,6 +33,10 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "Blue",
+              "value": "blue"
             }
           ]
         }
@@ -42,16 +46,7 @@
   "filters": [
     {
       "id": "section",
-      "components": [
-        "text",
-        "image",
-        "button",
-        "title",
-        "hero",
-        "cards",
-        "columns",
-        "fragment"
-      ]
+      "components": ["text", "image", "button", "title", "hero", "cards", "columns", "fragment"]
     }
   ]
 }
