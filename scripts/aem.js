@@ -642,8 +642,8 @@ function decorateBlock(block) {
 const NESTED_BLOCK_NAMES = ['cta', 'styled-text'];
 
 /**
- * Preview instance: divs may have label + variant as last two <p> alongside other content.
- * Wrap only those two <p>s in a new div.cta so the rest (text, headings) keeps rendering.
+ * Preview instance: wrap any (label, variant) pair where variant is variant-1/2/3 in div.cta.
+ * Scans all <p>s in each container so CTA is found even when styled-text content follows.
  * @param {Element} main The main element
  */
 function markPreviewCtas(main) {
@@ -652,27 +652,28 @@ function markPreviewCtas(main) {
     if (el.classList.contains('cta')) return;
     const container = el.querySelector('div') || el;
     const ps = [...container.querySelectorAll('p')];
-    if (ps.length < 2) return;
-    const lastText = ps[ps.length - 1].textContent.trim().toLowerCase();
-    if (!variantValues.includes(lastText)) return;
-    const labelP = ps[ps.length - 2];
-    const variantP = ps[ps.length - 1];
-    const ctaWrapper = document.createElement('div');
-    ctaWrapper.className = 'cta';
-    labelP.parentNode.insertBefore(ctaWrapper, labelP);
-    ctaWrapper.append(labelP, variantP);
+    ps.forEach((p) => {
+      const text = p.textContent.trim().toLowerCase();
+      if (!variantValues.includes(text)) return;
+      const prev = p.previousElementSibling;
+      if (!prev || prev.tagName !== 'P') return;
+      const ctaWrapper = document.createElement('div');
+      ctaWrapper.className = 'cta';
+      prev.parentNode.insertBefore(ctaWrapper, prev);
+      ctaWrapper.append(prev, p);
+    });
   });
 }
 
 /**
- * Preview instance: Styled Text can have color and/or border as last one or two <p>s (e.g. "gold", "border-right").
- * Wrap content in div.styled-text with the appropriate variant classes and remove the variant <p>s.
+ * Preview instance: Styled Text can have color and/or border as last <p>s (e.g. "gold", "default", "border-right").
+ * Remove trailing "default" (no class) then variant values; wrap preceding content in div.styled-text.
  * @param {Element} main The main element
  */
 function markPreviewStyledText(main) {
   const colorValues = ['gold'];
   const borderValues = ['border-right', 'border-left'];
-  const allValues = [...colorValues, ...borderValues];
+  const variantValues = [...colorValues, ...borderValues];
   const columnsBlocks = main.querySelectorAll('.columns');
   columnsBlocks.forEach((block) => {
     const row = block.firstElementChild;
@@ -683,7 +684,12 @@ function markPreviewStyledText(main) {
       let last = cell.lastElementChild;
       while (last && last.tagName === 'P') {
         const text = last.textContent.trim().toLowerCase();
-        if (allValues.includes(text)) {
+        if (text === 'default') {
+          last.remove();
+          last = cell.lastElementChild;
+          continue;
+        }
+        if (variantValues.includes(text)) {
           classes.push(`styled-text-${text}`);
           last.remove();
           last = cell.lastElementChild;
@@ -694,13 +700,15 @@ function markPreviewStyledText(main) {
       wrapper.className = `${classes.join(' ')} block`;
       wrapper.dataset.blockName = 'styled-text';
       wrapper.dataset.blockStatus = 'initialized';
-      /* Move only content that belongs to styled-text; stop at sibling blocks (e.g. CTA) */
-      while (cell.firstChild) {
-        const el = cell.firstChild;
+      /* Move only the tail (content after the last block) into styled-text; leave CTA and earlier content as siblings */
+      let firstTaken = null;
+      while (cell.lastElementChild) {
+        const el = cell.lastElementChild;
         if (el.classList && (el.classList.contains('cta') || el.classList.contains('block'))) break;
-        wrapper.appendChild(el);
+        if (!firstTaken) firstTaken = el;
+        wrapper.insertBefore(el, wrapper.firstChild);
       }
-      cell.appendChild(wrapper);
+      if (firstTaken) cell.insertBefore(wrapper, firstTaken);
     });
   });
 }
