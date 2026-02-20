@@ -662,6 +662,29 @@ function markPreviewCtas(main) {
 }
 
 /**
+ * Preview instance: Styled Text content can appear as plain content with variant as last <p> (e.g. "gold").
+ * Wrap the content (excluding that <p>) in div.styled-text.styled-text-gold and remove the variant <p>.
+ * @param {Element} main The main element
+ */
+function markPreviewStyledText(main) {
+  const variantValues = ['gold'];
+  const cells = main.querySelectorAll('.column-align-left, .column-align-right');
+  cells.forEach((cell) => {
+    const last = cell.lastElementChild;
+    if (!last || last.tagName !== 'P') return;
+    const text = last.textContent.trim().toLowerCase();
+    if (!variantValues.includes(text)) return;
+    last.remove();
+    const wrapper = document.createElement('div');
+    wrapper.className = 'styled-text styled-text-gold block';
+    wrapper.dataset.blockName = 'styled-text';
+    wrapper.dataset.blockStatus = 'initialized';
+    while (cell.firstChild) wrapper.appendChild(cell.firstChild);
+    cell.appendChild(wrapper);
+  });
+}
+
+/**
  * Decorates all blocks in a container element.
  * 1) Mark preview-style CTAs (label + variant as last two <p>) with class "cta".
  * 2) Section-level blocks: div.section > div > div (Styled Text, CTA, columns, hero, etc.).
@@ -671,6 +694,7 @@ function markPreviewCtas(main) {
  */
 function decorateBlocks(main) {
   markPreviewCtas(main);
+  markPreviewStyledText(main);
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
   NESTED_BLOCK_NAMES.forEach((name) => {
     main.querySelectorAll(`div.section div.${name}`).forEach((el) => {
