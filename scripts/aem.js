@@ -632,8 +632,8 @@ function decorateBlock(block) {
 const NESTED_BLOCK_NAMES = ['cta'];
 
 /**
- * Preview instance: divs may lack class "cta" and have label + variant as last two <p>.
- * Find such divs and add class "cta" so they are decorated and styled.
+ * Preview instance: divs may have label + variant as last two <p> alongside other content.
+ * Wrap only those two <p>s in a new div.cta so the rest (text, headings) keeps rendering.
  * @param {Element} main The main element
  */
 function markPreviewCtas(main) {
@@ -644,9 +644,13 @@ function markPreviewCtas(main) {
     const ps = [...container.querySelectorAll('p')];
     if (ps.length < 2) return;
     const lastText = ps[ps.length - 1].textContent.trim().toLowerCase();
-    if (variantValues.includes(lastText)) {
-      container.classList.add('cta');
-    }
+    if (!variantValues.includes(lastText)) return;
+    const labelP = ps[ps.length - 2];
+    const variantP = ps[ps.length - 1];
+    const ctaWrapper = document.createElement('div');
+    ctaWrapper.className = 'cta';
+    labelP.parentNode.insertBefore(ctaWrapper, labelP);
+    ctaWrapper.append(labelP, variantP);
   });
 }
 
