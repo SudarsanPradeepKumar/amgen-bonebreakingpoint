@@ -265,14 +265,6 @@ main img {
   width: 100%;
 }
 
-/* CTA: hide only raw authoring cells (label/variant divs) to avoid flash; button shows when decorator runs */
-.cta > div {
-  visibility: hidden;
-}
-.cta > .button-container {
-  visibility: visible;
-}
-
 /* sections */
 main > .section {
   margin: 0;
