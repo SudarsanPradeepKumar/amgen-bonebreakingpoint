@@ -701,14 +701,12 @@ function markPreviewStyledText(main) {
       wrapper.dataset.blockName = 'styled-text';
       wrapper.dataset.blockStatus = 'initialized';
       /* Move only the tail (content after the last block) into styled-text; leave CTA and earlier content as siblings */
-      let firstTaken = null;
       while (cell.lastElementChild) {
         const el = cell.lastElementChild;
         if (el.classList && (el.classList.contains('cta') || el.classList.contains('block'))) break;
-        if (!firstTaken) firstTaken = el;
         wrapper.insertBefore(el, wrapper.firstChild);
       }
-      if (firstTaken) cell.insertBefore(wrapper, firstTaken);
+      if (wrapper.firstChild) cell.appendChild(wrapper);
     });
   });
 }
