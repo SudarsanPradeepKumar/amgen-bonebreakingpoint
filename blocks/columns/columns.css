@@ -19,12 +19,12 @@
   display: block;
 }
 
-/* Content alignment: left (default) or right */
-.columns-align-left > div > div {
+/* Per-column content alignment: left (default) or right */
+.columns > div > div.column-align-left {
   text-align: left;
 }
 
-.columns-align-right > div > div {
+.columns > div > div.column-align-right {
   text-align: right;
 }
 
@@ -38,9 +38,5 @@
   .columns > div > div {
     flex: 1;
     order: unset;
-  }
-
-  .columns-align-right > div {
-    justify-content: flex-end;
   }
 }
