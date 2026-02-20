@@ -335,6 +335,14 @@ main img {
   color: inherit;
 }
 
+.styled-text.styled-text-border-right {
+  border-right: 2px solid #ceb340;
+}
+
+.styled-text.styled-text-border-left {
+  border-left: 2px solid #ceb340;
+}
+
 /* Columns block – alignment (loaded with main so they apply when block decorator runs) */
 .columns > div > div {
   display: flex;

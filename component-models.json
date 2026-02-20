@@ -141,6 +141,14 @@
           {
             "name": "Gold",
             "value": "gold"
+          },
+          {
+            "name": "Border right",
+            "value": "border-right"
+          },
+          {
+            "name": "Border left",
+            "value": "border-left"
           }
         ]
       }

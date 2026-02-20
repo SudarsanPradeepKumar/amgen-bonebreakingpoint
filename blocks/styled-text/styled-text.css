@@ -16,3 +16,13 @@
 .styled-text.styled-text-gold a:any-link {
   color: inherit;
 }
+
+/* Border right – 2px solid #ceb340 */
+.styled-text.styled-text-border-right {
+  border-right: 2px solid #ceb340;
+}
+
+/* Border left – 2px solid #ceb340 */
+.styled-text.styled-text-border-left {
+  border-left: 2px solid #ceb340;
+}
