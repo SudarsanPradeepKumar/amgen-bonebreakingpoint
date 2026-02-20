@@ -1,22 +1,35 @@
+function parseAlignClass(str) {
+  const m = (str || '').match(/columns-align-((?:left|right)(?:-(?:left|right))*)/i);
+  if (m && m[1]) {
+    return m[1].split('-').map((s) => (s.toLowerCase() === 'right' ? 'right' : 'left'));
+  }
+  return null;
+}
+
 /**
  * Read column alignments from block. Tries, in order:
- * 1) data-aue-prop="columnAlignments" (UE property)
- * 2) data-column-alignments attribute on block
- * 3) block class "columns-align-{left|right}-{left|right}-..." (e.g. columns-align-left-right)
- * 4) first row third cell (table config)
+ * 1) data-aue-prop="classes" (UE "Content alignment" field)
+ * 2) block class columns-align-*
+ * 3) data-aue-prop="columnAlignments"
+ * 4) data-column-alignments attribute
+ * 5) first row third cell
+ * 6) search block text for columns-align-* (preview fallback)
  */
 function getBlockColumnAlignments(block) {
   const classesEl = block.querySelector('[data-aue-prop="classes"]');
   const classesRaw = classesEl ? (classesEl.textContent || '').trim() : '';
   const alignFromClasses = classesRaw.split(/\s+/).find((c) => c.startsWith('columns-align-'));
   if (alignFromClasses) {
-    return alignFromClasses
-      .replace('columns-align-', '')
-      .split('-')
-      .map((s) => (s.toLowerCase() === 'right' ? 'right' : 'left'));
+    const out = parseAlignClass(alignFromClasses);
+    if (out) return out;
   }
-  const el = block.querySelector('[data-aue-prop="columnAlignments"]');
-  const raw = el ? (el.textContent || '').trim() : '';
+  const alignClass = Array.from(block.classList).find((c) => c.startsWith('columns-align-'));
+  if (alignClass) {
+    const out = parseAlignClass(alignClass);
+    if (out) return out;
+  }
+  const columnAlignEl = block.querySelector('[data-aue-prop="columnAlignments"]');
+  const raw = columnAlignEl ? (columnAlignEl.textContent || '').trim() : '';
   if (raw) {
     return raw.split(',').map((s) => (s.trim().toLowerCase() === 'right' ? 'right' : 'left'));
   }
@@ -24,17 +37,19 @@ function getBlockColumnAlignments(block) {
   if (attr) {
     return attr.split(',').map((s) => (s.trim().toLowerCase() === 'right' ? 'right' : 'left'));
   }
-  const alignClass = Array.from(block.classList).find((c) => c.startsWith('columns-align-'));
-  if (alignClass) {
-    return alignClass
-      .replace('columns-align-', '')
-      .split('-')
-      .map((s) => (s.toLowerCase() === 'right' ? 'right' : 'left'));
-  }
   const firstRow = block.firstElementChild;
   const thirdCell = firstRow && firstRow.children.length >= 3 ? firstRow.children[2].textContent : '';
-  const value = (thirdCell || 'left, left').trim();
-  return value.split(',').map((s) => (s.trim().toLowerCase() === 'right' ? 'right' : 'left'));
+  const value = (thirdCell || '').trim();
+  if (value) {
+    const fromCell = value.includes(',')
+      ? value.split(',').map((s) => (s.trim().toLowerCase() === 'right' ? 'right' : 'left'))
+      : parseAlignClass(value);
+    if (fromCell) return fromCell;
+  }
+  const blockText = block.textContent || '';
+  const parsed = parseAlignClass(blockText);
+  if (parsed && parsed.length >= 1) return parsed;
+  return ['left', 'left'];
 }
 
 function getColumnAlignment(col, index, blockAlignments) {
