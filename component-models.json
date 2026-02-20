@@ -120,34 +120,6 @@
     ]
   },
   {
-    "id": "text",
-    "fields": [
-      {
-        "component": "select",
-        "name": "variant",
-        "label": "Variant",
-        "options": [
-          {
-            "name": "Default",
-            "value": "default"
-          },
-          {
-            "name": "Gold text",
-            "value": "variant-1"
-          },
-          {
-            "name": "Border right",
-            "value": "variant-2"
-          },
-          {
-            "name": "Border left",
-            "value": "variant-3"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "section",
     "fields": [
       {
