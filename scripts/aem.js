@@ -632,12 +632,33 @@ function decorateBlock(block) {
 const NESTED_BLOCK_NAMES = ['cta'];
 
 /**
+ * Preview instance: divs may lack class "cta" and have label + variant as last two <p>.
+ * Find such divs and add class "cta" so they are decorated and styled.
+ * @param {Element} main The main element
+ */
+function markPreviewCtas(main) {
+  const variantValues = ['variant-1', 'variant-2', 'variant-3'];
+  main.querySelectorAll('div.section div').forEach((el) => {
+    if (el.classList.contains('cta')) return;
+    const container = el.querySelector('div') || el;
+    const ps = [...container.querySelectorAll('p')];
+    if (ps.length < 2) return;
+    const lastText = ps[ps.length - 1].textContent.trim().toLowerCase();
+    if (variantValues.includes(lastText)) {
+      container.classList.add('cta');
+    }
+  });
+}
+
+/**
  * Decorates all blocks in a container element.
- * 1) Section-level blocks: div.section > div > div (e.g. CTA, columns, hero).
- * 2) Nested blocks: div.section div.cta etc., so CTA inside columns is also decorated.
+ * 1) Mark preview-style CTAs (label + variant as last two <p>) with class "cta".
+ * 2) Section-level blocks: div.section > div > div (e.g. CTA, columns, hero).
+ * 3) Nested blocks: div.section div.cta etc., so CTA inside columns is also decorated.
  * @param {Element} main The container element
  */
 function decorateBlocks(main) {
+  markPreviewCtas(main);
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
   NESTED_BLOCK_NAMES.forEach((name) => {
     main.querySelectorAll(`div.section div.${name}`).forEach((el) => {
