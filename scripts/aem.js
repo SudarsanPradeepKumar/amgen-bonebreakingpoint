@@ -626,8 +626,9 @@ function decorateBlock(block) {
 
 /**
  * Block names that can appear both at section level and nested (e.g. inside columns).
- * Section-level blocks are found by div.section > div > div. Nested blocks are
- * found by a second pass so CTA (and others) render correctly in both places.
+ * Section-level: div.section > div > div finds direct blocks (Styled Text, CTA, etc.).
+ * Nested: second pass finds div.section div.cta, div.section div.styled-text, etc.,
+ * so CTA and Styled Text work inside columns and anywhere nested.
  */
 const NESTED_BLOCK_NAMES = ['cta', 'styled-text'];
 
@@ -657,8 +658,9 @@ function markPreviewCtas(main) {
 /**
  * Decorates all blocks in a container element.
  * 1) Mark preview-style CTAs (label + variant as last two <p>) with class "cta".
- * 2) Section-level blocks: div.section > div > div (e.g. CTA, columns, hero).
- * 3) Nested blocks: div.section div.cta etc., so CTA inside columns is also decorated.
+ * 2) Section-level blocks: div.section > div > div (Styled Text, CTA, columns, hero, etc.).
+ * 3) Nested blocks: div.section div.cta, div.section div.styled-text, etc., so blocks
+ *    inside columns (or anywhere nested) are also decorated and loaded.
  * @param {Element} main The container element
  */
 function decorateBlocks(main) {

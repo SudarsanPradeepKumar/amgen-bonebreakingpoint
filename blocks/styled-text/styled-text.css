@@ -1,10 +1,8 @@
 /* Styled Text block – extends default text with variants */
 
-/* Gold variant – background and text color */
+/* Gold variant – text color only */
 .styled-text.styled-text-gold {
-  background-color: #ceb340;
-  color: #fff;
-  padding: 1em 1.25em;
+  color: #ceb340;
 }
 
 .styled-text.styled-text-gold h1,
@@ -14,11 +12,7 @@
 .styled-text.styled-text-gold h5,
 .styled-text.styled-text-gold h6,
 .styled-text.styled-text-gold p,
-.styled-text.styled-text-gold li {
-  color: inherit;
-}
-
+.styled-text.styled-text-gold li,
 .styled-text.styled-text-gold a:any-link {
-  color: #fff;
-  text-decoration: underline;
+  color: inherit;
 }
