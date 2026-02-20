@@ -219,12 +219,20 @@
         "component": "select",
         "name": "classes",
         "label": "Content alignment",
-        "value": "columns-align-left-left",
+        "value": "columns-align-left-left columns-valign-center",
         "options": [
-          { "name": "Left, Left", "value": "columns-align-left-left" },
-          { "name": "Left, Right", "value": "columns-align-left-right" },
-          { "name": "Right, Left", "value": "columns-align-right-left" },
-          { "name": "Right, Right", "value": "columns-align-right-right" }
+          { "name": "Left, Left — Top", "value": "columns-align-left-left columns-valign-top" },
+          { "name": "Left, Left — Center", "value": "columns-align-left-left columns-valign-center" },
+          { "name": "Left, Left — Bottom", "value": "columns-align-left-left columns-valign-bottom" },
+          { "name": "Left, Right — Top", "value": "columns-align-left-right columns-valign-top" },
+          { "name": "Left, Right — Center", "value": "columns-align-left-right columns-valign-center" },
+          { "name": "Left, Right — Bottom", "value": "columns-align-left-right columns-valign-bottom" },
+          { "name": "Right, Left — Top", "value": "columns-align-right-left columns-valign-top" },
+          { "name": "Right, Left — Center", "value": "columns-align-right-left columns-valign-center" },
+          { "name": "Right, Left — Bottom", "value": "columns-align-right-left columns-valign-bottom" },
+          { "name": "Right, Right — Top", "value": "columns-align-right-right columns-valign-top" },
+          { "name": "Right, Right — Center", "value": "columns-align-right-right columns-valign-center" },
+          { "name": "Right, Right — Bottom", "value": "columns-align-right-right columns-valign-bottom" }
         ]
       }
     ]

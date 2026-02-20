@@ -64,12 +64,27 @@ function getColumnAlignment(col, index, blockAlignments) {
   return 'left';
 }
 
+function getBlockVerticalAlignment(block) {
+  const classesEl = block.querySelector('[data-aue-prop="classes"]');
+  const classesRaw = classesEl ? (classesEl.textContent || '').trim() : '';
+  const valign = classesRaw.split(/\s+/).find((c) => c.startsWith('columns-valign-'));
+  if (valign && /columns-valign-(top|center|bottom)/i.test(valign)) return valign;
+  const fromBlock = Array.from(block.classList).find((c) => c.startsWith('columns-valign-'));
+  if (fromBlock && /columns-valign-(top|center|bottom)/i.test(fromBlock)) return fromBlock;
+  const blockText = block.textContent || '';
+  const m = blockText.match(/columns-valign-(top|center|bottom)/i);
+  if (m) return `columns-valign-${m[1].toLowerCase()}`;
+  return 'columns-valign-center';
+}
+
 export default function decorate(block) {
   const firstRow = block.firstElementChild;
   const cols = firstRow ? [...firstRow.children] : [];
   block.classList.add(`columns-${cols.length}-cols`);
 
   const blockAlignments = getBlockColumnAlignments(block);
+  const valignClass = getBlockVerticalAlignment(block);
+  block.classList.add(valignClass);
 
   [...block.children].forEach((row) => {
     [...row.children].forEach((col, colIndex) => {

@@ -169,7 +169,7 @@
                 "template": {
                   "columns": "2",
                   "rows": "1",
-                  "classes": "columns-align-left-left"
+                  "classes": "columns-align-left-left columns-valign-center"
                 }
               }
             }

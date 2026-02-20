@@ -19,13 +19,31 @@
   display: block;
 }
 
-/* Per-column content alignment: left (default) or right */
+/* Per-column content alignment: left or right */
 .columns > div > div.column-align-left {
   text-align: left;
 }
 
 .columns > div > div.column-align-right {
   text-align: right;
+}
+
+/* Vertical alignment of content within each column (top, center, bottom) */
+.columns > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-valign-top > div > div {
+  justify-content: flex-start;
+}
+
+.columns-valign-center > div > div {
+  justify-content: center;
+}
+
+.columns-valign-bottom > div > div {
+  justify-content: flex-end;
 }
 
 @media (width >= 900px) {
