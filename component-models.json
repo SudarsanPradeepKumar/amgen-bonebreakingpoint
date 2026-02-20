@@ -214,6 +214,13 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      },
+      {
+        "component": "text",
+        "name": "columnAlignments",
+        "label": "Column alignments",
+        "value": "left, left",
+        "description": "Comma-separated: left or right per column (e.g. left, right)"
       }
     ]
   },
