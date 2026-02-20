@@ -629,7 +629,7 @@ function decorateBlock(block) {
  * Section-level blocks are found by div.section > div > div. Nested blocks are
  * found by a second pass so CTA (and others) render correctly in both places.
  */
-const NESTED_BLOCK_NAMES = ['cta'];
+const NESTED_BLOCK_NAMES = ['cta', 'styled-text'];
 
 /**
  * Preview instance: divs may have label + variant as last two <p> alongside other content.
