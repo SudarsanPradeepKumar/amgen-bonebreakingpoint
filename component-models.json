@@ -216,11 +216,16 @@
         "label": "Rows"
       },
       {
-        "component": "text",
-        "name": "columnAlignments",
-        "label": "Column alignments",
-        "value": "left, left",
-        "description": "Comma-separated: left or right per column (e.g. left, right)"
+        "component": "select",
+        "name": "classes",
+        "label": "Content alignment",
+        "value": "columns-align-left-left",
+        "options": [
+          { "name": "Left, Left", "value": "columns-align-left-left" },
+          { "name": "Left, Right", "value": "columns-align-left-right" },
+          { "name": "Right, Left", "value": "columns-align-right-left" },
+          { "name": "Right, Right", "value": "columns-align-right-right" }
+        ]
       }
     ]
   },

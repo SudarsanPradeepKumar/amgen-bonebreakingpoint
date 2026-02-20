@@ -1,1 +1,71 @@
-{"definitions":[{"title":"Columns","id":"columns","plugins":{"xwalk":{"page":{"resourceType":"core/franklin/components/columns/v1/columns","template":{"columns":"2","rows":"1","columnAlignments":"left, left"}}}}}],"models":[{"id":"columns","fields":[{"component":"text","valueType":"number","name":"columns","value":"","label":"Columns"},{"component":"text","valueType":"number","name":"rows","value":"","label":"Rows"},{"component":"text","name":"columnAlignments","label":"Column alignments","value":"left, left","description":"Comma-separated: left or right per column (e.g. left, right)"}]},{"id":"column","fields":[{"component":"select","name":"alignment","label":"Content alignment","options":[{"name":"Left","value":"left"},{"name":"Right","value":"right"}]}]}],"filters":[{"id":"columns","components":["column"]},{"id":"column","components":["text","image","button","title"]}]}
+{
+  "definitions": [
+    {
+      "title": "Columns",
+      "id": "columns",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/columns/v1/columns",
+            "template": {
+              "columns": "2",
+              "rows": "1",
+              "classes": "columns-align-left-left"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "",
+          "label": "Columns"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "",
+          "label": "Rows"
+        },
+        {
+          "component": "select",
+          "name": "classes",
+          "label": "Content alignment",
+          "value": "columns-align-left-left",
+          "options": [
+            { "name": "Left, Left", "value": "columns-align-left-left" },
+            { "name": "Left, Right", "value": "columns-align-left-right" },
+            { "name": "Right, Left", "value": "columns-align-right-left" },
+            { "name": "Right, Right", "value": "columns-align-right-right" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "column",
+      "fields": [
+        {
+          "component": "select",
+          "name": "alignment",
+          "label": "Content alignment",
+          "options": [
+            { "name": "Left", "value": "left" },
+            { "name": "Right", "value": "right" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    { "id": "columns", "components": ["column"] },
+    { "id": "column", "components": ["text", "image", "button", "title"] }
+  ]
+}

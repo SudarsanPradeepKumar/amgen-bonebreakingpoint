@@ -6,6 +6,15 @@
  * 4) first row third cell (table config)
  */
 function getBlockColumnAlignments(block) {
+  const classesEl = block.querySelector('[data-aue-prop="classes"]');
+  const classesRaw = classesEl ? (classesEl.textContent || '').trim() : '';
+  const alignFromClasses = classesRaw.split(/\s+/).find((c) => c.startsWith('columns-align-'));
+  if (alignFromClasses) {
+    return alignFromClasses
+      .replace('columns-align-', '')
+      .split('-')
+      .map((s) => (s.toLowerCase() === 'right' ? 'right' : 'left'));
+  }
   const el = block.querySelector('[data-aue-prop="columnAlignments"]');
   const raw = el ? (el.textContent || '').trim() : '';
   if (raw) {
