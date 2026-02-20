@@ -1,19 +1,38 @@
 /**
- * CTA block – builds a single button from the first row.
- * Columns: Link | Text | Title | Variant | Action (link | modal) | Modal ID
+ * CTA block – builds a single button from block cells.
+ * Cells: Link | Text | Title | Variant | Action (link | modal) | Modal ID
  * When Action is "modal", the CTA opens a modal instead of navigating.
+ * Reads from data-aue-prop when present (AEM), else by cell order.
  */
-export default function decorate(block) {
-  const row = block.querySelector('div > div');
-  if (!row) return;
+function getField(block, prop, fallback = '') {
+  const el = block.querySelector(`[data-aue-prop="${prop}"]`);
+  return (el?.textContent?.trim() ?? fallback);
+}
 
-  const cells = [...row.children];
-  const link = cells[0]?.textContent?.trim() || '#';
-  const text = cells[1]?.textContent?.trim() || 'Button';
-  const title = cells[2]?.textContent?.trim() || text;
-  const variant = (cells[3]?.textContent?.trim() || 'variant-1').toLowerCase();
-  const action = (cells[4]?.textContent?.trim() || 'link').toLowerCase();
-  const modalId = cells[5]?.textContent?.trim() || '';
+function getCellsInOrder(block) {
+  const direct = [...block.children].filter((el) => el.tagName === 'DIV');
+  const firstInner = block.querySelector('div > div');
+  if (firstInner && firstInner.children.length > 1) {
+    return [...firstInner.children];
+  }
+  return direct;
+}
+
+export default function decorate(block) {
+  const cells = getCellsInOrder(block);
+  const getCell = (i) => (cells[i]?.textContent?.trim() ?? '');
+
+  const variantVal = (getField(block, 'variant') || getCell(3) || 'variant-1').toLowerCase();
+  const rawCell1 = getCell(1);
+  const rawCell2 = getCell(2);
+  const isVariantLike = (s) => /^variant-[123]$/.test((s || '').toLowerCase());
+
+  const link = getField(block, 'link') || getCell(0) || '#';
+  const text = getField(block, 'linkText') || (rawCell1 && !isVariantLike(rawCell1) ? rawCell1 : '') || 'Button';
+  const title = getField(block, 'linkTitle') || (rawCell2 && !isVariantLike(rawCell2) ? rawCell2 : '') || text;
+  const variant = variantVal;
+  const action = (getField(block, 'action') || getCell(4) || 'link').toLowerCase();
+  const modalId = getField(block, 'modalId') || getCell(5) || '';
 
   const allowedVariants = ['variant-1', 'variant-2', 'variant-3'];
   const variantClass = allowedVariants.includes(variant) ? variant : 'variant-1';
