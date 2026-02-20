@@ -120,7 +120,7 @@
     ]
   },
   {
-    "id": "text",
+    "id": "styled-text",
     "fields": [
       {
         "component": "select",

@@ -317,6 +317,11 @@ main img {
   color: #318bda;
 }
 
+/* Styled Text block – variants (same as default text, plus variant classes) */
+.styled-text.styled-text-gold {
+  color: #ceb340;
+}
+
 /* Columns block – alignment (loaded with main so they apply when block decorator runs) */
 .columns > div > div {
   display: flex;
@@ -344,11 +349,6 @@ main img {
   .columns > div > div {
     flex: 1;
   }
-}
-
-/* Text (richtext) variant – gold */
-.text.text-gold {
-  color: #ceb340;
 }
 
 /* sections */

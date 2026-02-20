@@ -619,11 +619,6 @@ function decorateBlock(block) {
     blockWrapper.classList.add(`${shortBlockName}-wrapper`);
     const section = block.closest('.section');
     if (section) section.classList.add(`${shortBlockName}-container`);
-    if (shortBlockName === 'text') {
-      const variantEl = block.querySelector('[data-aue-prop="variant"]');
-      const variant = (variantEl?.textContent?.trim() ?? block.dataset.variant ?? '').toLowerCase();
-      if (variant === 'gold') block.classList.add('text-gold');
-    }
     // eslint-disable-next-line no-use-before-define
     decorateButtons(block);
   }

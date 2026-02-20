@@ -1,0 +1,6 @@
+/* Styled Text block – extends default text with variants */
+
+/* Gold variant */
+.styled-text.styled-text-gold {
+  color: #ceb340;
+}
