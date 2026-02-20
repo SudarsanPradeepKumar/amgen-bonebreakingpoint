@@ -382,6 +382,7 @@ function wrapTextNodes(block) {
     'UL',
     'OL',
     'PICTURE',
+    'IMG',
     'TABLE',
     'H1',
     'H2',
@@ -495,10 +496,40 @@ function decorateIcons(element, prefix = '') {
 }
 
 /**
+ * Resolve relative image URLs so they load in preview (avoids broken src / about:error).
+ * @param {Element} container The container element (e.g. main)
+ */
+function resolveImageUrls(container) {
+  const base = window.location.href;
+  container.querySelectorAll('img[src]').forEach((img) => {
+    const src = img.getAttribute('src');
+    if (!src || src === 'about:error') {
+      const fallback = img.dataset.src || img.dataset.imageSrc || img.getAttribute('data-src');
+      if (fallback) img.setAttribute('src', new URL(fallback, base).href);
+      return;
+    }
+    if (src.startsWith('./') || (src.startsWith('/') && !src.startsWith('//'))) {
+      try {
+        img.setAttribute('src', new URL(src, base).href);
+      } catch (e) { /* keep original */ }
+    }
+  });
+  container.querySelectorAll('source[srcset]').forEach((source) => {
+    const srcset = source.getAttribute('srcset');
+    if (srcset && (srcset.startsWith('./') || (srcset.startsWith('/') && !srcset.startsWith('//')))) {
+      try {
+        source.setAttribute('srcset', new URL(srcset.trim().split(/\s+/)[0], base).href);
+      } catch (e) { /* keep original */ }
+    }
+  });
+}
+
+/**
  * Decorates all sections in a container element.
  * @param {Element} main The container element
  */
 function decorateSections(main) {
+  resolveImageUrls(main);
   main.querySelectorAll(':scope > div:not([data-section-status])').forEach((section) => {
     const wrappers = [];
     let defaultContent = false;
@@ -700,10 +731,11 @@ function markPreviewStyledText(main) {
       wrapper.className = `${classes.join(' ')} block`;
       wrapper.dataset.blockName = 'styled-text';
       wrapper.dataset.blockStatus = 'initialized';
-      /* Move only the tail (content after the last block) into styled-text; leave CTA and earlier content as siblings */
+      /* Move only the tail (content after the last block) into styled-text; leave CTA, image, and earlier content as siblings */
       while (cell.lastElementChild) {
         const el = cell.lastElementChild;
         if (el.classList && (el.classList.contains('cta') || el.classList.contains('block'))) break;
+        if (el.querySelector('img') || el.querySelector('picture') || el.tagName === 'IMG' || el.tagName === 'PICTURE') break;
         wrapper.insertBefore(el, wrapper.firstChild);
       }
       if (wrapper.firstChild) cell.appendChild(wrapper);
@@ -827,6 +859,7 @@ export {
   loadSection,
   loadSections,
   readBlockConfig,
+  resolveImageUrls,
   sampleRUM,
   setup,
   toCamelCase,

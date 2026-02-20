@@ -6,6 +6,7 @@ import {
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
+  resolveImageUrls,
   waitForFirstImage,
   loadSection,
   loadSections,
@@ -77,7 +78,7 @@ function buildAutoBlocks() {
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
-  // hopefully forward compatible button decoration
+  resolveImageUrls(main);
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
