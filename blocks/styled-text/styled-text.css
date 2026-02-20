@@ -17,6 +17,46 @@
   color: inherit;
 }
 
+/* CTA inside styled-text: use CTA styles, not gold */
+.styled-text .cta,
+.styled-text .cta a.button,
+.styled-text .cta button.button {
+  color: unset;
+}
+.styled-text .cta a.button.variant-1,
+.styled-text .cta button.button.variant-1 {
+  color: #318bda;
+}
+.styled-text .cta a.button.variant-1:hover,
+.styled-text .cta a.button.variant-1:focus,
+.styled-text .cta button.button.variant-1:hover,
+.styled-text .cta button.button.variant-1:focus {
+  background-color: #318bda;
+  color: #fff;
+}
+.styled-text .cta a.button.variant-2,
+.styled-text .cta button.button.variant-2 {
+  color: #ede6de;
+}
+.styled-text .cta a.button.variant-2:hover,
+.styled-text .cta a.button.variant-2:focus,
+.styled-text .cta button.button.variant-2:hover,
+.styled-text .cta button.button.variant-2:focus {
+  background-color: #ede6de;
+  color: #542d70;
+}
+.styled-text .cta a.button.variant-3,
+.styled-text .cta button.button.variant-3 {
+  color: #ede6de;
+}
+.styled-text .cta a.button.variant-3:hover,
+.styled-text .cta a.button.variant-3:focus,
+.styled-text .cta button.button.variant-3:hover,
+.styled-text .cta button.button.variant-3:focus {
+  background-color: #ede6de;
+  color: #318bda;
+}
+
 /* Border right – 2px solid #ceb340, padding between border and text */
 .styled-text.styled-text-border-right {
   border-right: 2px solid #ceb340;
