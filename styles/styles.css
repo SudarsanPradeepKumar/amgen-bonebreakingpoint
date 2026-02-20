@@ -265,15 +265,12 @@ main img {
   width: 100%;
 }
 
-/* CTA: hide until block is loaded to avoid flash of raw label/variant content */
-.cta:not([data-block-status="loaded"]) {
-  opacity: 0;
-  pointer-events: none;
+/* CTA: hide only raw authoring cells (label/variant divs) to avoid flash; button shows when decorator runs */
+.cta > div {
+  visibility: hidden;
 }
-
-.cta[data-block-status="loaded"] {
-  opacity: 1;
-  pointer-events: auto;
+.cta > .button-container {
+  visibility: visible;
 }
 
 /* sections */
