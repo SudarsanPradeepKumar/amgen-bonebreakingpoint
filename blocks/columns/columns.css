@@ -19,6 +19,15 @@
   display: block;
 }
 
+/* Content alignment: left (default) or right */
+.columns-align-left > div > div {
+  text-align: left;
+}
+
+.columns-align-right > div > div {
+  text-align: right;
+}
+
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
@@ -29,5 +38,9 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  .columns-align-right > div {
+    justify-content: flex-end;
   }
 }
